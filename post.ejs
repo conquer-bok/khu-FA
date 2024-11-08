@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>KHU_FA - 게시글 상세보기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #555;
+        }
+        .file-download {
+            margin-bottom: 40px; /* 파일 다운로드 아래에 여백 추가 */
+        }
+        .button-group {
+            display: flex;
+            gap: 10px; /* 두 버튼 사이에 여백 추가 */
+            margin-top: 20px;
+        }
+        .button-group a, .button-group button {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button-group a:hover, .button-group button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= post.title %></h1>
+        <p>단과대: <%= post.college %></p>
+        <p>작성일: <%= post.createdAt.toLocaleString() %></p>
+        
+        <div class="file-download">
+            <% if (post.file) { %>
+                <a href="/<%= post.file %>" download>파일 다운로드</a>
+            <% } else { %>
+                <p>첨부파일이 없습니다.</p>
+            <% } %>
+        </div>
+        
+        <!-- 삭제 폼 -->
+        <form class="delete-form" action="/delete/<%= post._id %>?_method=DELETE" method="POST">
+            <button type="submit" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">게시물 삭제</button>
+        </form>        
+
+        <a class="back-link" href="/">목록으로 돌아가기</a>
+    </div>
+</body>
+</html>
