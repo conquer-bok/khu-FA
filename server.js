@@ -10,6 +10,8 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+const mongoURI = process.env.MONGODB_URI || "mongodb+srv://ksngee4:@jb950405@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database";
+
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log("MongoDB connection error:", err));
@@ -90,5 +92,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://ksngee4:@jb950405@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database";
