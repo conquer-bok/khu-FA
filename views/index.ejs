@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>KHU_FA - 게시글 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #555;
+            text-align: center;
+        }
+        .actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .filter select, .actions button {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>게시글 목록</h1>
+        <div class="actions">
+            <!-- 게시글 작성 버튼 추가 -->
+            <a href="/new">
+                <button>게시글 작성</button>
+            </a>
+            
+            <!-- 단과대 필터 추가 -->
+            <div class="filter">
+                <label for="collegeFilter">단과대별로 보기:</label>
+                <select id="collegeFilter" onchange="filterByCollege()">
+                    <option value="">전체</option>
+                    <option value="문과대학">문과대학</option>
+                    <option value="외국어대학">외국어대학</option>
+                    <option value="자율전공학부">자율전공학부</option>
+                    <option value="정경대학">정경대학</option>
+                    <option value="국제대학">국제대학</option>
+                    <option value="경영대학">경영대학</option>
+                    <option value="호텔관광대학">호텔관광대학</option>
+                    <option value="생활과학대학">생활과학대학</option>
+                    <option value="이과대학">이과대학</option>
+                    <option value="공과대학">공과대학</option>
+                    <option value="전자정보대학">전자정보대학</option>
+                    <option value="소프트웨어융합대학">소프트웨어융합대학</option>
+                    <option value="응용과학대학">응용과학대학</option>
+                    <option value="생명과학대학">생명과학대학</option>
+                    <option value="의과대학">의과대학</option>
+                    <option value="한의과대학">한의과대학</option>
+                    <option value="치과대학">치과대학</option>
+                    <option value="약학대학">약학대학</option>
+                    <option value="간호과학대학">간호과학대학</option>
+                    <option value="음악대학">음악대학</option>
+                    <option value="미술대학">미술대학</option>
+                    <option value="무용학부">무용학부</option>
+                    <option value="예술디자인대학">예술디자인대학</option>
+                    <option value="체육대학">체육대학</option>
+                </select>
+            </div>
+        </div>
+        
+        <ul id="postList">
+            <% posts.forEach(post => { %>
+                <li data-college="<%= post.college %>">
+                    <a href="/post/<%= post._id %>"><%= post.title %> - <%= post.college %></a>
+                    <form action="/delete/<%= post._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('이 게시물을 삭제하시겠습니까?');">삭제</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+    </div>
+
+    <script>
+        function filterByCollege() {
+            const filter = document.getElementById('collegeFilter').value;
+            const posts = document.querySelectorAll('#postList li');
+            posts.forEach(post => {
+                if (filter === "" || post.dataset.college === filter) {
+                    post.style.display = "";
+                } else {
+                    post.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
