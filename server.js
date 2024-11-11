@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://ksngee4:@jb950405@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database';
 const multer = require('multer');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -7,7 +8,12 @@ const fs = require('fs'); // 파일 시스템 모듈 추가
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/boardDB', { useNewUrlParser: true, useUnifiedTopology: true });
+const cors = require('cors');
+app.use(cors());
+
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.log("MongoDB connection error:", err));
 
 const storage = multer.diskStorage({
     destination: './uploads/',
@@ -81,7 +87,7 @@ app.delete('/delete/:id', async (req, res) => {
     }
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
