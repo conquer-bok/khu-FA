@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://ksngee4:@jb950405@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database';
+const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://ksngee4:<@jb950405>@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database';
 const multer = require('multer');
 const path = require('path');
 const methodOverride = require('method-override');
