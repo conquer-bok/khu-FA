@@ -91,4 +91,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://ksngee4:<@jb950405>@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database";
+const uri = "mongodb+srv://ksngee4:@jb950405@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database";
