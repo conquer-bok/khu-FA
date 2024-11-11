@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://ksngee4:<@jb950405>@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database';
 const multer = require('multer');
 const path = require('path');
 const methodOverride = require('method-override');
@@ -91,3 +90,5 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://ksngee4:<@jb950405>@database.gu4px.mongodb.net/?retryWrites=true&w=majority&appName=database";
